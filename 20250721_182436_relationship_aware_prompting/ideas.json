@@ -1,0 +1,92 @@
+[
+    {
+        "Name": "relationship_aware_prompting",
+        "Title": "Context-Aware Schema Relationship Prompting for Text-to-SQL",
+        "Experiment": "1. Add _extract_relevant_relationships() that filters FK info using question tokens 2. Implement _infer_relationships() for schemas without explicit constraints 3. Enhance _relationships_to_str() with relevance markers 4. Update prompt builders to use filtered relationships 5. Add fallback to table joins when FKs are missing 6. Benchmark on vacancies_normalized_duck with/without explicit constraints",
+        "Interestingness": 9,
+        "Feasibility": 9,
+        "Novelty": 8,
+        "novel": true
+    },
+    {
+        "Name": "data_disambiguation",
+        "Title": "Question-Focused Data Sampling for Text-to-SQL Disambiguation",
+        "Experiment": "1. Modify _tables_info_to_str() to include sample data (2-3 values) for columns mentioned in the question. 2. Update _get_column_samples() to use DbConnection with 'SELECT DISTINCT {column} FROM {table} LIMIT 3'. 3. Implement question-based column filtering: only sample columns whose names appear as tokens in the question. 4. Benchmark on vacancies_normalized_duck comparing original vs modified model.",
+        "Interestingness": 9,
+        "Feasibility": 9,
+        "Novelty": 8,
+        "novel": true
+    },
+    {
+        "Name": "lightweight_metadata_feedback",
+        "Title": "Column-Level Execution Feedback for Text-to-SQL Correction",
+        "Experiment": "1. Add _get_result_metadata() using DbConnection's cursor.description after execution 2. Implement _infer_expected_columns() with simple keyword matching 3. Modify predict_sql() to trigger one additional regeneration when result columns mismatch expectations 4. Add fallback to original behavior when metadata unavailable 5. Create concise prompt templates highlighting column mismatches 6. Benchmark on vacancies_normalized_duck comparing original vs metadata-aware model",
+        "Interestingness": 9,
+        "Feasibility": 9,
+        "Novelty": 8,
+        "novel": true
+    },
+    {
+        "Name": "temporal_grounding",
+        "Title": "Context-Aware Temporal Grounding for Ambiguous Time References in Text-to-SQL",
+        "Experiment": "1. Add _extract_temporal_expressions() using spaCy's Matcher with custom patterns 2. Implement _cache_date_ranges() during __init__ to store min/max dates per datetime column 3. Create _resolve_temporal() handling: a) relative times ('recent') b) comparisons ('before 2023') c) durations ('within 6 months') 4. Modify _build_user_prompt() to inject resolved constraints as 'Temporal Context: ...' 5. Add temporal_grounding=True/False flag in constructor 6. Benchmark on vacancies_normalized_duck using time-sensitive questions with/without grounding",
+        "Interestingness": 9,
+        "Feasibility": 9,
+        "Novelty": 9,
+        "novel": true
+    },
+    {
+        "Name": "lexical_alignment",
+        "Title": "Schema-Guided Lexical Alignment for Text-to-SQL Semantic Bridging",
+        "Experiment": "1. Modify __init__ to precompute schema term mappings using column descriptions from TableInfo. 2. Implement _resolve_lexical_gap(question, context): a) Tokenize question b) For unmatched tokens, suggest schema terms using: i) Column descriptions ii) Levenshtein distance fallback iii) Gold_recs co-occurrence if available. 3. Update _build_user_prompt() to append 'Lexical Notes: [token\u2192schema_term]' only for unresolved tokens. 4. Add min_similarity parameter (default=0.7). 5. Benchmark on vacancies_normalized_duck measuring accuracy on questions with schema-term mismatches.",
+        "Interestingness": 9,
+        "Feasibility": 9,
+        "Novelty": 8,
+        "novel": true
+    },
+    {
+        "Name": "compositional_decomposition",
+        "Title": "Prompt-Guided Query Decomposition for Multi-Step Text-to-SQL",
+        "Experiment": "1. Add _detect_compositional_question() using keyword patterns (e.g., 'than', 'compared to', 'per') 2. Modify _build_system_prompt(): Append CTE decomposition instructions when compositional detected 3. Update _build_user_prompt(): Add 'Use WITH clauses for step-by-step computation' for compositional questions 4. Keep existing retry mechanism without intermediate validations 5. Benchmark on vacancies_normalized_duck: a) Overall performance b) Subset of multi-clause questions c) Ablation (with/without decomposition prompt)",
+        "Interestingness": 9,
+        "Feasibility": 9,
+        "Novelty": 9,
+        "novel": true
+    },
+    {
+        "Name": "targeted_constraint_modeling",
+        "Title": "Question-Driven Implicit Constraint Resolution via Lightweight Distribution Modeling",
+        "Experiment": "1. Add _detect_constraint_keywords() to identify constraint terms (e.g., 'high', 'typical') in questions 2. Implement _get_relevant_stats() computing min/max/avg only for columns matching both constraint keywords and question tokens 3. Create _stats_to_nl() generating concise constraint phrases (e.g., 'Salary ranges from $X to $Y') 4. Modify _tables_info_to_str() to inject relevant constraint phrases 5. Add caching for computed stats 6. Benchmark on vacancies_normalized_duck comparing original vs modified model on constraint-implicit questions",
+        "Interestingness": 9,
+        "Feasibility": 10,
+        "Novelty": 9,
+        "novel": true
+    },
+    {
+        "Name": "value_grounding",
+        "Title": "Dynamic Value Grounding for Ambiguous Term Resolution in Text-to-SQL",
+        "Experiment": "1. Add _detect_ambiguous_terms() using predefined terms (['competitive','recent','high','typical']) 2. Implement _ground_ambiguous_terms(context, db) that: a) Maps terms to columns via exact token matching between terms and column names/descriptions b) For matching numeric columns, execute 'SELECT PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY {column}) FROM {table}' with try/except for query errors c) Generate NL clarifications (\"'competitive salary' \u2248 median value of ${result}\") d) Skip if no matching column or query fails 3. Modify both _build_user_prompt() and _build_regen_user_prompt() to inject clarifications 4. Benchmark on vacancies_normalized_duck analyzing: a) Overall performance b) Questions with detected ambiguous terms",
+        "Interestingness": 9,
+        "Feasibility": 9,
+        "Novelty": 9,
+        "novel": true
+    },
+    {
+        "Name": "execution_pattern_mining",
+        "Title": "Question-Focused Execution Pattern Mining for Adaptive Text-to-SQL Generation",
+        "Experiment": "1. Add _extract_question_tables(): Tokenize context.question and match against context.tables_info names. 2. Implement _extract_sql_patterns(sql, tables): Use SQLparse to identify JOIN types between question tables and presence of aggregations. 3. Add _update_pattern_cache(question_tables, patterns): Store patterns with frequency counts. 4. Create _get_pattern_hints(question_tables): For current tables, return top pattern (e.g., 'A-B joins: 80% LEFT JOIN'). 5. Modify predict_sql(): After successful execution, extract question tables and update cache. Before prompt build, inject hints via system_prompt += self._get_pattern_hints(). 6. Add try/except around pattern extraction. 7. Benchmark on vacancies_normalized_duck: a) Overall accuracy b) JOIN/aggregation queries c) Cold-start vs warm-cache performance.",
+        "Interestingness": 9,
+        "Feasibility": 9,
+        "Novelty": 9,
+        "novel": true
+    },
+    {
+        "Name": "relationship_based_disambiguation",
+        "Title": "Schema-Relationship-Guided Disambiguation for Ambiguous Query Terms",
+        "Experiment": "1. Add _detect_ambiguous_terms() using regex for ambiguous constructs 2. Implement _generate_relationship_interpretations() that: a) Maps terms to tables via token matching b) Identifies related tables through foreign keys in TableInfo c) Generates interpretations using relationship descriptions (e.g., 'competitive departments' \u2192 'JOIN departments ON department.salary_rank') 3. Modify _build_user_prompt() to inject top interpretation as 'Schema Note: {term} relates to {relationship_description}' 4. Add min_confidence parameter (default=0.6) for interpretation injection 5. Benchmark on vacancies_normalized_duck: a) Overall accuracy b) Precision on relationship-based ambiguities c) Comparison with baseline on JOIN-heavy queries",
+        "Interestingness": 10,
+        "Feasibility": 9,
+        "Novelty": 9,
+        "novel": true
+    }
+]

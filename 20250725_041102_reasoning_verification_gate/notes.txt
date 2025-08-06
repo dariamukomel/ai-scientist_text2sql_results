@@ -1,0 +1,5 @@
+# Title: Schema-Constrained Reasoning Verification for SQL Generation
+# Experiment description: 1) Update PROMPT_DATA templates to enforce <think>-tagged reasoning before SQL 2) Modify _parse_sql() to return (reasoning, sql) tuple 3) Implement _verify_reasoning() checking: a) Column mentions exist in schema b) JOIN conditions match foreign keys in context.ddl c) Table references exist 4) In predict_sql(): after initial generation, run verification before execution d) If verification fails, regenerate ONCE using targeted error prompt 5) Create schema_error_prompt highlighting specific missing columns/tables 6) Integrate with existing execution retry loop 7) Measure reduction in regeneration attempts on BenchRunner's JOIN-heavy queries.
+## Run 0: Baseline
+Results: {'bench': {'easy_medium': 85.5, 'total': 86.7, 'counts': {'not parsed': [1], '0%': [0, {'easy': 0, 'medium': 0, 'hard': 0}], '(0-25%]': [11, {'easy': 0, 'medium': 9, 'hard': 1}], '(25-50%]': [10, {'easy': 0, 'medium': 5, 'hard': 2}], '(50-75%]': [7, {'easy': 2, 'medium': 1, 'hard': 1}], '(75-100%]': [31, {'easy': 10, 'medium': 20, 'hard': 1}]}}}
+Description: Baseline results.

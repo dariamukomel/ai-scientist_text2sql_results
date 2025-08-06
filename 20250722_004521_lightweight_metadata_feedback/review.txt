@@ -1,0 +1,37 @@
+{
+    "Summary": "The paper introduces a column-level execution feedback system for text-to-SQL that improves semantic correctness by detecting and correcting mismatches between query results and user intent. It combines domain-specific synonym matching with context-aware regeneration strategies, achieving 92.7% accuracy on easy+medium queries and 93.3% overall on a job vacancies benchmark.",
+    "Strengths": [
+        "Novel column-level execution feedback mechanism targeting semantic mismatches.",
+        "Effective use of domain-specific synonym matching to address terminology mismatches.",
+        "Context-aware regeneration strategies that activate only when relevant error patterns are detected.",
+        "Demonstrated improvements in accuracy and robustness on a benchmark dataset."
+    ],
+    "Weaknesses": [
+        "Limited evaluation on a single benchmark, raising questions about generalizability.",
+        "Lack of comparison with state-of-the-art methods, making it hard to assess relative performance.",
+        "Unclear details on the regeneration strategy and synonym matching implementation.",
+        "Potential biases or limitations in the domain-specific synonym matching are not addressed."
+    ],
+    "Originality": 3,
+    "Quality": 3,
+    "Clarity": 3,
+    "Significance": 4,
+    "Questions": [
+        "How does the proposed method compare to state-of-the-art text-to-SQL systems?",
+        "Can the regeneration strategy be generalized to other domains beyond job vacancies?",
+        "What are the computational overheads of the feedback mechanism?",
+        "How robust is the synonym matching to variations in natural language phrasing?"
+    ],
+    "Limitations": [
+        "The evaluation is limited to a single benchmark, which may not capture the full range of challenges in text-to-SQL.",
+        "The method assumes static schemas and syntactically valid initial queries, which may not hold in real-world scenarios.",
+        "The paper does not discuss the scalability of the approach to larger or more complex databases."
+    ],
+    "Ethical Concerns": false,
+    "Soundness": 3,
+    "Presentation": 3,
+    "Contribution": 3,
+    "Overall": 6,
+    "Confidence": 4,
+    "Decision": "Accept"
+}

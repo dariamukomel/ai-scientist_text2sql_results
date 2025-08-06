@@ -1,0 +1,269 @@
+Benchmark: Test
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+Error during model call: 'ColumnInfo' object has no attribute 'foreign_key'. Returning empty string.
+
+	Question: 'количество строк в таблице вакансий'
+		Parse error:No expression was parsed from ''
+
+	Question: 'максимальная зарплата в октябре 2022 в Москве, Омске и Екатеринбурге в разбивке по городам'
+		Parse error:No expression was parsed from ''
+
+	Question: 'какая средняя зарплата в разбивке по каждому режиму работы'
+		Parse error:No expression was parsed from ''
+
+	Question: 'сколько всего вакансий Java разработчика'
+		Parse error:No expression was parsed from ''
+
+	Question: 'сколько всего вакансий Python разработчика в Петербурге'
+		Parse error:No expression was parsed from ''
+
+	Question: 'вакансии C++ разработчика с зарплатой больше 200000'
+		Parse error:No expression was parsed from ''
+
+	Question: 'вакансии Java разработчика с зарплатой больше 150000 и удалённым режимом работы'
+		Parse error:No expression was parsed from ''
+
+	Question: 'сколько вакансий, у которых указана зарплата в рублях'
+		Parse error:No expression was parsed from ''
+
+	Question: 'В каком городе больше всего вакансий Python разработчиков'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Количество вакансий, у которых не указана зарплата'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какая максимальная зарплата в разбивке по валютам'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Вакансии со смешанным режимом работы от работодателей из Омска'
+		Can't optimize query, using query as is. Error: Column 'schedule_type' could not be resolved
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какие уникальные направления вакансий представлены в базе данных?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какова средняя нижняя граница зарплаты для вакансий, размещенных в Санкт-Петербурге?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какова максимальная верхняя граница зарплаты в вакансиях, размещенных в Москве?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Сколько вакансий с зарплатой от 50000 до 100000 предоставлены работодателем 'ООО Рога и Копыта'?'
+		Can't optimize query, using query as is. Error: Column 'salary_from' could not be resolved
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какие вакансии были опубликованы 1 апреля 2020 года?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какое количество вакансий было добавлено после 1 января 2021 года?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Выдайте список вакансий со ставкой зарплаты от 50000 до 100000 RUR'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какие уникальные департаменты представлены в базе?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Сколько вакансий с гибким графиком работы?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какие вакансии предлагают зарплату в USD?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Сколько вакансий предлагает работодатель с именем 'ООО Ромашка'?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какие вакансии были добавлены 5 марта 2021 года?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'В каких городах предлагаются вакансии с графиком работы на удаленке?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какова максимальная верхняя граница зарплаты в вакансиях?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Позвольте мне посмотреть вакансии с указанием улицы работодателя 'Большая Морская''
+		Parse error:No expression was parsed from ''
+
+	Question: 'Сколько вакансий с уровнем 'middle' предлагают зарплату свыше 100000 рублей?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какая валюта используется в наибольшем количестве вакансий?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Сколько работодателей предлагают вакансии с гибким графиком работы?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какие вакансии были добавлены в Санкт-Петербурге в феврале 2021 года?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Сколько рабочих мест предлагают работодатели из Омска с зарплатой, оплачиваемой в долларах?'
+		Can't optimize query, using query as is. Error: Column 'salary_currency' could not be resolved
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какое количество уникальных работодателей предлагают вакансии с полным рабочим днем?'
+		Can't optimize query, using query as is. Error: Column 'schedule_type' could not be resolved
+		Parse error:No expression was parsed from ''
+
+	Question: 'Сколько вакансий открыто в каждой валюте?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Сколько вакансий предлагают удаленную работу?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Каковы топ 5 работодателей из Москвы по количеству вакансий?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'В каком городе, где нанимают сотрудников, имеется наибольшее количество вакансий?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Назовите 5 вакансий с самой высокой зарплатой в Москве.'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Назовите 10 вакансий с последними датами добавления.'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Сколько вакансий было добавлено в Екатеринбурге в январе 2022 года?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какое количество вакансий относится к направлению 'it'?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Сколько вакансий с уровнем 'senior' в направлении 'frontend'?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Сколько вакансий от работодателя с идентификатором 5?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Сколько вакансий предлагает работодатель 'Yandex'?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какие вакансии предлагаются с зарплатой выше 5000 USD?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Сколько вакансий было добавлено сегодня?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какова средняя нижняя граница зарплаты для вакансий, где зарплата указана в долларах США?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какие названия вакансий есть у работодателя с названием 'ООО Ништяк'?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Покажите все вакансии, добавленные после 01-01-2022'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Покажите первые десять вакансий с наиболее высоким уровнем зарплаты.'
+		Parse error:No expression was parsed from ''
+
+	Question: 'В каком департаменте открыта вакансия с идентификатором 3'
+		Can't optimize query, using query as is. Error: Column 'department_name' could not be resolved
+		Parse error:No expression was parsed from ''
+
+	Question: 'Предоставьте список вакансий для 'backend' направления в компании 'Yandex'.'
+		Parse error:No expression was parsed from ''
+
+	Question: 'В каких компаниях из Москвы есть вакансии для 'senior' специалистов?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Показать департаменты, которые находятся в компании 'ООО Ништяк'.'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Сколько вакансий с удаленной работой есть в компаниях Москвы?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Сколько вакансий предлагает департамент 'finance' компании 'ООО Рога и Копыта'?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какое количество вакансий для 'middle' специалистов было добавлено в компаниях 'Санкт-Петербурга' в 2022 году?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какова средняя нижняя граница зарплаты вакансий в компаниях из Екатеринбурга?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Сколько вакансий предложено в компаниях, которые расположены на улице Ленина?'
+		Parse error:No expression was parsed from ''
+
+	Question: 'Какие вакансии предлагаются в компаниях из Санкт-Петербурга, в направлении 'bigdata'?'
+		Parse error:No expression was parsed from ''
+
+Summary:
+	not parsed: 60
+	0%: 0, exec success: 0 {'easy': 0, 'medium': 0, 'hard': 0} {'easy': '0.0%', 'medium': '0.0%', 'hard': '0.0%'}
+	(0-25%]: 0, exec success: 0 {'easy': 0, 'medium': 0, 'hard': 0} {'easy': '0.0%', 'medium': '0.0%', 'hard': '0.0%'}
+	(25-50%]: 0, exec success: 0 {'easy': 0, 'medium': 0, 'hard': 0} {'easy': '0.0%', 'medium': '0.0%', 'hard': '0.0%'}
+	(50-75%]: 0, exec success: 0 {'easy': 0, 'medium': 0, 'hard': 0} {'easy': '0.0%', 'medium': '0.0%', 'hard': '0.0%'}
+	(75-100%]: 0, exec success: 0 {'easy': 0, 'medium': 0, 'hard': 0} {'easy': '0.0%', 'medium': '0.0%', 'hard': '0.0%'}
+
+	not select: 0
+	parse errors: 60
+	exec errors: 0
+	unknown errors: 0
+	critical errors: 0
+
+	Total percent of successfully executed sql by complexity:
+	Easy: 0.0%
+	Medium: 0.0%
+	Hard: 0.0%
+
+	Metric(Easy+Medium): 0.0% (0/55)
+
+	Total percent of successfully executed sql 0.0% (0/60)

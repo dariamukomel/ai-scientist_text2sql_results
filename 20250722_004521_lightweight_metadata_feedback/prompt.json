@@ -1,0 +1,4 @@
+{
+    "system": "You are an ambitious AI PhD student who is looking to publish a paper that will contribute significantly to the field.",
+    "task_description": "Improve text-to-SQL generation. You have a DeepseekAIScientist model with a mandatory predict_sql method. Hints, examples, and information about tables can be passed to ContextData. However, it can also be empty. There is also a DbConnection that you can use and explore the dataset. Change the DeepseekAIScientist model to maximize the performance of the BenchRunner benchmark."
+}

@@ -1,0 +1,37 @@
+{
+    "Summary": "The paper proposes M-schema, a structured representation for schema encoding, and a validated generation process to improve text-to-SQL conversion. The authors claim significant improvements in accuracy, particularly for JOIN and aggregation queries, through explicit schema validation and structured representations.",
+    "Strengths": [
+        "Novel structured schema representation (M-schema) that explicitly encodes table relationships and column properties.",
+        "Validated generation process that enforces schema verification before SQL production.",
+        "Demonstrated improvements in accuracy for JOIN and aggregation queries."
+    ],
+    "Weaknesses": [
+        "Lack of comparison with state-of-the-art methods, making it difficult to assess the true contribution.",
+        "Unclear methodology details, particularly around the step-by-step validation process.",
+        "Insufficient discussion on limitations and potential failure cases.",
+        "Experimental setup is not fully transparent, and the dataset used (vacancies_normalized_duck) is not well-known or benchmarked.",
+        "Results, while promising, are not convincingly superior to existing approaches."
+    ],
+    "Originality": 3,
+    "Quality": 2,
+    "Clarity": 2,
+    "Significance": 2,
+    "Questions": [
+        "How does M-schema compare to other schema encoding methods in the literature?",
+        "Can you provide more details on the step-by-step validation process?",
+        "What are the specific limitations of your approach, especially for hard queries?",
+        "Why was the vacancies_normalized_duck dataset chosen, and how does it compare to standard benchmarks like Spider?"
+    ],
+    "Limitations": [
+        "Limited comparison with state-of-the-art methods.",
+        "Unclear generalizability due to the use of a non-standard dataset.",
+        "Insufficient discussion on failure cases and limitations."
+    ],
+    "Ethical Concerns": false,
+    "Soundness": 2,
+    "Presentation": 2,
+    "Contribution": 2,
+    "Overall": 4,
+    "Confidence": 4,
+    "Decision": "Reject"
+}

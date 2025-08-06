@@ -1,0 +1,92 @@
+[
+    {
+        "Name": "schema_augmented_relationships",
+        "Title": "Schema Augmentation with Verified Relationships for Robust SQL Generation",
+        "Experiment": "1) Add _extract_relationships() method with prompt for relationship tuple extraction 2) Implement _validate_relationships() against foreign keys 3) Create _augment_schema() to transform valid tuples into pseudo-DDL statements 4) Modify predict_sql() to: a) Extract relationships b) Validate c) Augment context.ddl with relationship DDL 5) Update prompt templates to reference augmented schema. Measure improvement in join accuracy and reduction in regeneration attempts.",
+        "Interestingness": 9,
+        "Feasibility": 9,
+        "Novelty": 8,
+        "novel": true
+    },
+    {
+        "Name": "semantic_statistical_augmentation",
+        "Title": "Semantic-Aware Statistical Augmentation for Contextual SQL Generation",
+        "Experiment": "1) Add _identify_ambiguous_terms() with enhanced pattern matching for temporal/quantitative/relational terms. 2) Implement _generate_semantic_hints() that: a) Uses cosine similarity to match terms to relevant columns in context.tables_info b) Creates natural language hints from statistics (e.g., \"'Recent' typically means after {max_date-30d}\") c) Includes fallback for missing stats. 3) Modify _build_system_prompt() to prepend generated hints to context.hints. 4) Add question preservation check to maintain original intent. Measure accuracy gains on ambiguous queries and reduction in regeneration cycles.",
+        "Interestingness": 9,
+        "Feasibility": 9,
+        "Novelty": 9,
+        "novel": true
+    },
+    {
+        "Name": "adaptive_error_prevention",
+        "Title": "Adaptive Error Prevention Escalation for SQL Generation",
+        "Experiment": "1) Add _generate_error_hint(error: str, retry_count: int) method that: a) Extracts DB-specific error codes (e.g., PostgreSQL codes) b) Escalates hint specificity with retries (e.g., basic syntax check on retry 1, type validation on retry 2) c) Returns targeted NL hints. 2) Modify predict_sql() retry loop to: a) Pass current retry_count to hint generator b) Prepend generated hint to context.hints 3) Update regex patterns to capture DB error codes. 4) Measure reduction in regeneration attempts and improvement in first-attempt accuracy.",
+        "Interestingness": 9,
+        "Feasibility": 10,
+        "Novelty": 9,
+        "novel": true
+    },
+    {
+        "Name": "data_distribution_grounding",
+        "Title": "Runtime Data Distribution Grounding for Contextual SQL Generation",
+        "Experiment": "1) Add _sample_column_distribution(db: DbConnection, table: str, column: str) -> str method that: a) Runs safe, limited queries (e.g., \"SELECT MIN(column), MAX(column) FROM table\") b) Formats results as NL hints (e.g., \"'recent' means > 2023-01-01\") c) Handles query errors gracefully. 2) Modify predict_sql() to: a) Identify 1-3 temporal/categorical columns from question/context b) Sample distributions via _sample_column_distribution() c) Prepend hints to context.hints (new list if immutable) d) Cache results per table-column. 3) Measure reduction in value-mismatch errors and regeneration attempts on BenchRunner's temporal/categorical buckets.",
+        "Interestingness": 9,
+        "Feasibility": 9,
+        "Novelty": 9,
+        "novel": true
+    },
+    {
+        "Name": "reasoning_consistency_loop",
+        "Title": "Schema-Grounded Reasoning Consistency Verification for SQL Generation",
+        "Experiment": "1) Update PROMPT_DATA to require <think>-tagged reasoning 2) Modify _parse_sql() to extract reasoning 3) Implement _verify_consistency() using: a) Entity extraction from reasoning b) Schema validation against context.ddl/tables_info c) SQL pattern matching 4) Add pre-execution check: if critical schema entities in reasoning missing in SQL, regenerate using new inconsistency prompt 5) Create inconsistency_correction_prompt highlighting specific mismatches 6) Integrate with existing regeneration flow while preserving original context 7) Measure reduction in regeneration attempts and error rates on JOIN-heavy queries.",
+        "Interestingness": 9,
+        "Feasibility": 9,
+        "Novelty": 9,
+        "novel": true
+    },
+    {
+        "Name": "reasoning_verification_gate",
+        "Title": "Schema-Constrained Reasoning Verification for SQL Generation",
+        "Experiment": "1) Update PROMPT_DATA templates to enforce <think>-tagged reasoning before SQL 2) Modify _parse_sql() to return (reasoning, sql) tuple 3) Implement _verify_reasoning() checking: a) Column mentions exist in schema b) JOIN conditions match foreign keys in context.ddl c) Table references exist 4) In predict_sql(): after initial generation, run verification before execution d) If verification fails, regenerate ONCE using targeted error prompt 5) Create schema_error_prompt highlighting specific missing columns/tables 6) Integrate with existing execution retry loop 7) Measure reduction in regeneration attempts on BenchRunner's JOIN-heavy queries.",
+        "Interestingness": 9,
+        "Feasibility": 9,
+        "Novelty": 8,
+        "novel": true
+    },
+    {
+        "Name": "partial_result_grounding",
+        "Title": "Partial Result Verification for Targeted SQL Correction",
+        "Experiment": "1) Add _verify_question_elements(db, question, sql) method that: a) Extracts key terms (e.g., entities/timeframes) from question b) Creates EXISTS() subqueries for each term (e.g., \"SELECT EXISTS(SELECT 1 FROM table WHERE term_filter)\") c) Returns terms with false EXISTS() results. 2) Implement _sample_term_values(db, table, term) with SELECT ... LIMIT 3. 3) Modify predict_sql() retry loop to: a) Run verification after execution errors b) For unverified terms, prepend samples to context.hints (e.g., \"No results for 'recent jobs'. Sample dates: [2023-01, 2023-02]\"). 4) Add row-limit (1000) to sampling. 5) Measure accuracy improvement on BenchRunner's JOIN/value-sensitive queries.",
+        "Interestingness": 9,
+        "Feasibility": 9,
+        "Novelty": 9,
+        "novel": true
+    },
+    {
+        "Name": "focused_ddl_presentation",
+        "Title": "Question-Focused DDL Highlighting for Targeted SQL Generation",
+        "Experiment": "1) Modify _ddl_to_str() to accept question parameter. 2) Enhance method to: a) Reuse context.tables_info parsing b) Bold/asterisk columns/tables mentioned in question c) Maintain standard format for non-matches. 3) Update _build_system_prompt() and _build_user_prompt() to pass question to _ddl_to_str(). 4) Add instruction in PROMPT_DATA: 'Pay special attention to highlighted schema elements'. 5) Preserve original DDL formatting when no matches exist. 6) Measure reduction in invalid schema references and JOIN errors on BenchRunner's complex queries.",
+        "Interestingness": 9,
+        "Feasibility": 10,
+        "Novelty": 8,
+        "novel": true
+    },
+    {
+        "Name": "plan_aware_validation",
+        "Title": "Query Plan-Aware Validation for Pre-Execution SQL Optimization",
+        "Experiment": "1) Add method `_analyze_query_plan(db: DbConnection, sql: str) -> tuple[bool, str]` that: a) Runs `EXPLAIN {sql}` and captures output as a string. b) On exception, returns (True, f'\u041e\u0448\u0438\u0431\u043a\u0430 EXPLAIN: {str(e)}'). c) Checks for patterns (e.g., 'SCAN', 'CROSS PRODUCT') and returns (True, predefined Russian hint) if found, else (False, ''). 2) Modify predict_sql() retry loop: After SQL generation, run plan analysis. If issues found: i) Build regeneration messages using existing regen prompts with hint as error ii) Regenerate SQL and increment retry count iii) Skip execution. 3) If no issues, attempt execution. 4) On execution errors, proceed with existing handling. 5) Measure reduction in regeneration attempts and accuracy gains on BenchRunner.",
+        "Interestingness": 9,
+        "Feasibility": 9,
+        "Novelty": 8,
+        "novel": true
+    },
+    {
+        "Name": "adaptive_consistency_gate",
+        "Title": "Schema-Aware Adaptive Consistency Enforcement for SQL Generation",
+        "Experiment": "1) Update PROMPT_DATA to request <think>-tagged reasoning 2) Modify _parse_sql() to capture reasoning trace 3) Add _detect_schema_mismatches(reasoning: str, context: ContextData) -> list[str]: a) Extract table/column candidates via substring matching against known schema elements b) Flag only fully unknown terms not in context.ddl 4) In predict_sql(): a) Run detection after generation b) If mismatches found, append warnings to context.hints (e.g., \"Note: 'X' not in schema\") c) Proceed to execution unless critical JOIN elements missing 5) Create new warning_prompt template for hint injection 6) Measure reduction in invalid references while tracking false positive rates",
+        "Interestingness": 10,
+        "Feasibility": 9,
+        "Novelty": 9,
+        "novel": true
+    }
+]

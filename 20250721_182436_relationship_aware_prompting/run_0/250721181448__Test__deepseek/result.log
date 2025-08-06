@@ -1,0 +1,470 @@
+Benchmark: Test
+Generated SQL executed with error: (duckdb.duckdb.ParserException) Parser Error: syntax error at or near "vacancies"
+[SQL: SELECT vacancies.schedule_type, AVG((vacancies.salary_from  vacancies.salary_to)/2)  FROM vacancies  GROUP BY vacancies.schedule_type]
+(Background on this error at: https://sqlalche.me/e/20/f405). Regenerating sql for question: "какая средняя зарплата в разбивке по каждому режиму работы"
+Generated SQL executed with error: (duckdb.duckdb.ParserException) Parser Error: syntax error at or near "vacancies"
+[SQL: SELECT vacancies.schedule_type, AVG((vacancies.salary_from  vacancies.salary_to)/2)  FROM vacancies  GROUP BY vacancies.schedule_type]
+(Background on this error at: https://sqlalche.me/e/20/f405). Regenerating sql for question: "какая средняя зарплата в разбивке по каждому режиму работы"
+Generated SQL executed with error: (duckdb.duckdb.ParserException) Parser Error: syntax error at or near "vacancies"
+[SQL: SELECT vacancies.schedule_type, AVG((vacancies.salary_from  vacancies.salary_to)/2)  FROM vacancies   GROUP BY vacancies.schedule_type]
+(Background on this error at: https://sqlalche.me/e/20/f405). Regenerating sql for question: "какая средняя зарплата в разбивке по каждому режиму работы"
+
+	Question: 'количество строк в таблице вакансий'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies;
+		Pred sql: SELECT COUNT(*) FROM vacancies
+
+	Question: 'максимальная зарплата в октябре 2022 в Москве, Омске и Екатеринбурге в разбивке по городам'
+		Changes count: 3
+		Keep percent: 87.5
+		Execution check: SUCCESS
+		Gold sql: SELECT work_location, MAX(salary_to) AS max_salary FROM vacancies WHERE date_added BETWEEN '2022-10-01' AND '2022-10-31'AND work_location IN ('Москва', 'Омск', 'Екатеринбург') GROUP BY work_location;
+		Pred sql: SELECT      work_location,     MAX(salary_to) AS max_salary FROM      vacancies WHERE      work_location IN ('Москва', 'Омск', 'Екатеринбург')     AND date_added >= '2022-10-01'     AND date_added < '2022-11-01' GROUP BY      work_location
+
+	Question: 'какая средняя зарплата в разбивке по каждому режиму работы'
+		Parse error:Expecting ). Line 1, Col: 70.   SELECT vacancies.schedule_type, AVG((vacancies.salary_from  vacancies[4m.[0msalary_to)/2)  FROM vacancies  GROUP BY vacancies.schedule_type
+
+	Question: 'сколько всего вакансий Java разработчика'
+		Changes count: 3
+		Keep percent: 72.73
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies WHERE name LIKE '%Java разработчик%';
+		Pred sql: SELECT COUNT(*) FROM vacancies WHERE vacancies.name = 'Java разработчик'
+
+	Question: 'сколько всего вакансий Python разработчика в Петербурге'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies WHERE name LIKE '%Python разработчик%' AND work_location = 'Санкт-Петербург';
+		Pred sql: SELECT COUNT(*) FROM vacancies WHERE vacancies.name LIKE '%Python разработчик%' AND vacancies.work_location = 'Санкт-Петербург'
+
+	Question: 'вакансии C++ разработчика с зарплатой больше 200000'
+		Changes count: 10
+		Keep percent: 50.0
+		Execution check: SUCCESS
+		Gold sql: SELECT name FROM vacancies WHERE name LIKE '%C++ разработчик%' AND salary_to > 200000;
+		Pred sql: SELECT * FROM vacancies WHERE vacancies.name = 'C++ разработчик' AND (vacancies.salary_from > 200000 OR vacancies.salary_to > 200000)
+
+	Question: 'вакансии Java разработчика с зарплатой больше 150000 и удалённым режимом работы'
+		Changes count: 5
+		Keep percent: 73.68
+		Execution check: SUCCESS
+		Gold sql: SELECT name FROM vacancies WHERE salary_from > 150000 AND schedule_type ='remote' AND name LIKE '%Java разработчик%';
+		Pred sql: SELECT vacancies.vacancy_id, vacancies.name  FROM vacancies  WHERE vacancies.name = 'Java разработчик'  AND vacancies.salary_from > '150000'  AND vacancies.schedule_type = 'remote'
+
+	Question: 'сколько вакансий, у которых указана зарплата в рублях'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies WHERE salary_currency = 'RUR';
+		Pred sql: SELECT COUNT(*) FROM vacancies WHERE vacancies.salary_currency = 'RUR'
+
+	Question: 'В каком городе больше всего вакансий Python разработчиков'
+		Changes count: 6
+		Keep percent: 71.43
+		Execution check: SUCCESS
+		Gold sql: SELECT work_location FROM vacancies WHERE name LIKE '%Python разработчик%' GROUP BY work_location ORDER BY COUNT(*) DESC LIMIT 1;
+		Pred sql: SELECT vacancies.work_location, COUNT(*)  FROM vacancies  WHERE vacancies.name LIKE '%Python разработчик%'  GROUP BY vacancies.work_location  ORDER BY COUNT(*) DESC  LIMIT 1
+
+	Question: 'Количество вакансий, у которых не указана зарплата'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies WHERE salary_from IS NULL AND salary_to IS NULL;
+		Pred sql: SELECT COUNT(*) FROM vacancies WHERE vacancies.salary_from IS NULL AND vacancies.salary_to IS NULL
+
+	Question: 'Какая максимальная зарплата в разбивке по валютам'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT salary_currency, MAX(salary_to) AS max_salary FROM vacancies GROUP BY salary_currency;
+		Pred sql: SELECT salary_currency, MAX(salary_to)  FROM vacancies  GROUP BY salary_currency
+
+	Question: 'Вакансии со смешанным режимом работы от работодателей из Омска'
+		Can't optimize query, using query as is. Error: Column 'schedule_type' could not be resolved
+		Changes count: 30
+		Keep percent: 11.76
+		Execution check: SUCCESS
+		Gold sql: SELECT v.name FROM vacancies v JOIN companies c ON v.company_id = c.company_id WHERE schedule_type ='flexible' AND c.company_city = 'Омск';
+		Pred sql: SELECT vacancies.vacancy_id, vacancies.name  FROM vacancies  JOIN companies ON vacancies.company_id = companies.company_id  WHERE companies.company_city = 'Омск'  AND vacancies.schedule_type = 'flexible'
+
+	Question: 'Какие уникальные направления вакансий представлены в базе данных?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT DISTINCT direction FROM vacancies
+		Pred sql: SELECT DISTINCT(direction) FROM vacancies
+
+	Question: 'Какова средняя нижняя граница зарплаты для вакансий, размещенных в Санкт-Петербурге?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT AVG(salary_from) FROM vacancies WHERE work_location = 'Санкт-Петербург'
+		Pred sql: SELECT AVG(vacancies.salary_from)  FROM vacancies  WHERE vacancies.work_location = 'Санкт-Петербург'
+
+	Question: 'Какова максимальная верхняя граница зарплаты в вакансиях, размещенных в Москве?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT MAX(salary_to) FROM vacancies WHERE work_location = 'Москва'
+		Pred sql: SELECT MAX(vacancies.salary_to)  FROM vacancies  WHERE vacancies.work_location = 'Москва'
+
+	Question: 'Сколько вакансий с зарплатой от 50000 до 100000 предоставлены работодателем 'ООО Рога и Копыта'?'
+		Can't optimize query, using query as is. Error: Column 'salary_from' could not be resolved
+		Changes count: 32
+		Keep percent: 20.0
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies v JOIN companies c ON v.company_id = c.company_id WHERE c.name = 'ООО Рога и Копыта' AND salary_from >= 50000 AND salary_to <= 100000
+		Pred sql: SELECT COUNT(*)  FROM vacancies  JOIN companies ON vacancies.company_id = companies.company_id  WHERE companies.name = 'ООО Рога и Копыта'  AND vacancies.salary_from >= 50000  AND vacancies.salary_to <= 100000
+
+	Question: 'Какие вакансии были опубликованы 1 апреля 2020 года?'
+		Changes count: 2
+		Keep percent: 80.0
+		Execution check: SUCCESS
+		Gold sql: SELECT name FROM vacancies WHERE date_added = '2020-04-01'
+		Pred sql: SELECT * FROM vacancies WHERE vacancies.date_added = '2020-04-01'
+
+	Question: 'Какое количество вакансий было добавлено после 1 января 2021 года?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies WHERE date_added > '2021-01-01'
+		Pred sql: SELECT COUNT(*) FROM vacancies WHERE vacancies.date_added > '2021-01-01'
+
+	Question: 'Выдайте список вакансий со ставкой зарплаты от 50000 до 100000 RUR'
+		Changes count: 2
+		Keep percent: 88.89
+		Execution check: SUCCESS
+		Gold sql: SELECT name FROM vacancies WHERE salary_from >= 50000 AND salary_to <= 100000 AND salary_currency='RUR'
+		Pred sql: SELECT * FROM vacancies  WHERE salary_from >= 50000  AND salary_to <= 100000  AND salary_currency = 'RUR'
+
+	Question: 'Какие уникальные департаменты представлены в базе?'
+		Changes count: 1
+		Keep percent: 83.33
+		Execution check: FAILED
+		Mismatched Values:
+			Gold: cols={'department_name': 'it department'} Pred: cols={'department_code': 'D1'}
+			Gold: cols={'department_name': 'finance department'} Pred: cols={'department_code': 'F1'}
+			Gold: cols={'department_name': 'logistics department'} Pred: cols={'department_code': 'L1'}
+.................................
+			Gold: {None: None} Pred: cols={'department_code': 'MARK1'}
+			Gold: {None: None} Pred: cols={'department_code': 'E1'}
+			Gold: {None: None} Pred: cols={'department_code': 'BD3'}
+		Gold sql: SELECT DISTINCT department_name FROM departments
+		Pred sql: SELECT DISTINCT(departments.department_code) FROM departments
+
+	Question: 'Сколько вакансий с гибким графиком работы?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies WHERE schedule_type='flexible'
+		Pred sql: SELECT COUNT(*) FROM vacancies WHERE vacancies.schedule_type = 'flexible'
+
+	Question: 'Какие вакансии предлагают зарплату в USD?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT name FROM vacancies WHERE salary_currency='USD'
+		Pred sql: SELECT name FROM vacancies WHERE salary_currency = 'USD'
+
+	Question: 'Сколько вакансий предлагает работодатель с именем 'ООО Ромашка'?'
+		Changes count: 13
+		Keep percent: 38.1
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies v JOIN companies c ON v.company_id = c.company_id WHERE c.name='ООО Ромашка'
+		Pred sql: SELECT COUNT(*) FROM vacancies JOIN companies ON vacancies.company_id = companies.company_id WHERE companies.name = 'ООО Ромашка'
+
+	Question: 'Какие вакансии были добавлены 5 марта 2021 года?'
+		Changes count: 2
+		Keep percent: 80.0
+		Execution check: SUCCESS
+		Gold sql: SELECT name FROM vacancies WHERE date_added = '2021-03-05'
+		Pred sql: SELECT * FROM vacancies WHERE vacancies.date_added = '2021-03-05'
+
+	Question: 'В каких городах предлагаются вакансии с графиком работы на удаленке?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT DISTINCT work_location FROM vacancies WHERE schedule_type='remote'
+		Pred sql: SELECT DISTINCT(vacancies.work_location)  FROM vacancies  WHERE vacancies.schedule_type = 'remote'
+
+	Question: 'Какова максимальная верхняя граница зарплаты в вакансиях?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT MAX(salary_to) FROM vacancies
+		Pred sql: SELECT MAX(salary_to) FROM vacancies
+
+	Question: 'Позвольте мне посмотреть вакансии с указанием улицы работодателя 'Большая Морская''
+		Changes count: 18
+		Keep percent: 21.74
+		Execution check: SUCCESS
+		Gold sql: SELECT v.name FROM vacancies v JOIN companies c ON v.company_id = c.company_id WHERE c.company_street ='Большая Морская'
+		Pred sql: SELECT vacancies.*  FROM vacancies  JOIN companies ON vacancies.company_id = companies.company_id  WHERE companies.company_street = 'Большая Морская'
+
+	Question: 'Сколько вакансий с уровнем 'middle' предлагают зарплату свыше 100000 рублей?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies WHERE level = 'middle' AND salary_from > 100000 AND salary_currency = 'RUR'
+		Pred sql: SELECT COUNT(*)  FROM vacancies  WHERE vacancies.level = 'middle'  AND vacancies.salary_from > 100000  AND vacancies.salary_currency = 'RUR'
+
+	Question: 'Какая валюта используется в наибольшем количестве вакансий?'
+		Changes count: 3
+		Keep percent: 80.0
+		Execution check: SUCCESS
+		Gold sql: SELECT salary_currency, COUNT() FROM vacancies GROUP BY salary_currency ORDER BY COUNT() DESC LIMIT 1
+		Pred sql: SELECT vacancies.salary_currency, COUNT(*)  FROM vacancies  GROUP BY vacancies.salary_currency  ORDER BY COUNT(*) DESC  LIMIT 1
+
+	Question: 'Сколько работодателей предлагают вакансии с гибким графиком работы?'
+		Changes count: 13
+		Keep percent: 35.0
+		Execution check: FAILED
+		Mismatched Values:
+			Gold: cols={'count_star()': '54'} Pred: cols={'count(DISTINCT companies.company_id)': '52'}
+		Gold sql: SELECT COUNT(*) FROM vacancies WHERE schedule_type = 'flexible'
+		Pred sql: SELECT COUNT(DISTINCT(companies.company_id))  FROM vacancies  JOIN companies ON vacancies.company_id = companies.company_id  WHERE vacancies.schedule_type = 'flexible'
+
+	Question: 'Какие вакансии были добавлены в Санкт-Петербурге в феврале 2021 года?'
+		Changes count: 6
+		Keep percent: 70.0
+		Execution check: SUCCESS
+		Gold sql: SELECT name FROM vacancies WHERE work_location = 'Санкт-Петербург' AND date_added BETWEEN '2021-02-01' AND '2021-02-28'
+		Pred sql: SELECT * FROM vacancies  WHERE work_location = 'Санкт-Петербург'  AND date_added >= '2021-02-01'  AND date_added < '2021-03-01'
+
+	Question: 'Сколько рабочих мест предлагают работодатели из Омска с зарплатой, оплачиваемой в долларах?'
+		Can't optimize query, using query as is. Error: Column 'salary_currency' could not be resolved
+		Changes count: 27
+		Keep percent: 18.18
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies v JOIN companies c ON v.company_id = c.company_id WHERE c.company_city = 'Омск' AND salary_currency = 'USD'
+		Pred sql: SELECT COUNT(*)  FROM vacancies  JOIN companies ON vacancies.company_id = companies.company_id  WHERE companies.company_city = 'Омск' AND vacancies.salary_currency = 'USD'
+
+	Question: 'Какое количество уникальных работодателей предлагают вакансии с полным рабочим днем?'
+		Can't optimize query, using query as is. Error: Column 'schedule_type' could not be resolved
+		Changes count: 27
+		Keep percent: 10.0
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(DISTINCT c.name) FROM vacancies v JOIN companies c ON v.company_id = c.company_id WHERE schedule_type = 'fullDay'
+		Pred sql: SELECT COUNT(DISTINCT companies.company_id)  FROM vacancies  JOIN companies ON vacancies.company_id = companies.company_id  WHERE vacancies.schedule_type = 'fullDay'
+
+	Question: 'Сколько вакансий открыто в каждой валюте?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT salary_currency, COUNT(*) FROM vacancies GROUP BY salary_currency
+		Pred sql: SELECT salary_currency, COUNT(*)  FROM vacancies  GROUP BY salary_currency
+
+	Question: 'Сколько вакансий предлагают удаленную работу?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies WHERE schedule_type = 'remote'
+		Pred sql: SELECT COUNT(*) FROM vacancies WHERE vacancies.schedule_type = 'remote'
+
+	Question: 'Каковы топ 5 работодателей из Москвы по количеству вакансий?'
+		Changes count: 24
+		Keep percent: 27.27
+		Execution check: SUCCESS
+		Gold sql: SELECT c.name, COUNT() FROM vacancies v JOIN companies c ON v.company_id = c.company_id WHERE c.company_city = 'Москва' GROUP BY c.name ORDER BY COUNT() DESC LIMIT 5
+		Pred sql: SELECT companies.name, COUNT(*) as vacancy_count  FROM vacancies  JOIN companies ON vacancies.company_id = companies.company_id  WHERE companies.company_city = 'Москва'  GROUP BY companies.name  ORDER BY vacancy_count DESC  LIMIT 5
+
+	Question: 'В каком городе, где нанимают сотрудников, имеется наибольшее количество вакансий?'
+		Changes count: 3
+		Keep percent: 80.0
+		Execution check: SUCCESS
+		Gold sql: SELECT work_location, COUNT() FROM vacancies GROUP BY work_location ORDER BY COUNT() DESC LIMIT 1
+		Pred sql: SELECT work_location, COUNT(*)  FROM vacancies  GROUP BY work_location  ORDER BY COUNT(*) DESC  LIMIT 1
+
+	Question: 'Назовите 5 вакансий с самой высокой зарплатой в Москве.'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT name FROM vacancies WHERE work_location = 'Москва' ORDER BY salary_to DESC LIMIT 5
+		Pred sql: SELECT vacancies.name  FROM vacancies  WHERE vacancies.work_location = 'Москва'  ORDER BY vacancies.salary_to DESC  LIMIT 5
+
+	Question: 'Назовите 10 вакансий с последними датами добавления.'
+		Changes count: 6
+		Keep percent: 57.14
+		Execution check: SUCCESS
+		Gold sql: SELECT name FROM vacancies ORDER BY date_added DESC LIMIT 10
+		Pred sql: SELECT name, date_added  FROM vacancies  ORDER BY date_added DESC  LIMIT 10
+
+	Question: 'Сколько вакансий было добавлено в Екатеринбурге в январе 2022 года?'
+		Changes count: 3
+		Keep percent: 84.21
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies WHERE work_location = 'Екатеринбург' AND date_added BETWEEN '2022-01-01' AND '2022-01-31'
+		Pred sql: SELECT COUNT(*) FROM vacancies WHERE vacancies.work_location = 'Екатеринбург' AND vacancies.date_added >= '2022-01-01' AND vacancies.date_added < '2022-02-01'
+
+	Question: 'Какое количество вакансий относится к направлению 'it'?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies WHERE direction = 'it'
+		Pred sql: SELECT COUNT(*) FROM vacancies WHERE vacancies.direction = 'it'
+
+	Question: 'Сколько вакансий с уровнем 'senior' в направлении 'frontend'?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies WHERE level = 'senior' AND direction = 'frontend';
+		Pred sql: SELECT COUNT(*)  FROM vacancies  WHERE vacancies.level = 'senior' AND vacancies.direction = 'frontend'
+
+	Question: 'Сколько вакансий от работодателя с идентификатором 5?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies WHERE company_id = 5;
+		Pred sql: SELECT COUNT(*) FROM vacancies WHERE company_id = 5
+
+	Question: 'Сколько вакансий предлагает работодатель 'Yandex'?'
+		Changes count: 13
+		Keep percent: 38.1
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies v JOIN companies c ON v.company_id = c.company_id WHERE c.name = 'Yandex';
+		Pred sql: SELECT COUNT(*) FROM vacancies JOIN companies ON vacancies.company_id = companies.company_id WHERE companies.name = 'Yandex'
+
+	Question: 'Какие вакансии предлагаются с зарплатой выше 5000 USD?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT name FROM vacancies WHERE salary_from > 5000 AND salary_currency = 'USD';
+		Pred sql: SELECT name  FROM vacancies  WHERE salary_from > 5000 AND salary_currency = 'USD'
+
+	Question: 'Сколько вакансий было добавлено сегодня?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies WHERE date_added = CURRENT_DATE
+		Pred sql: SELECT COUNT(*) FROM vacancies WHERE vacancies.date_added = CURRENT_DATE
+
+	Question: 'Какова средняя нижняя граница зарплаты для вакансий, где зарплата указана в долларах США?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT AVG(salary_from) FROM vacancies WHERE salary_currency = 'USD'
+		Pred sql: SELECT AVG(vacancies.salary_from)  FROM vacancies  WHERE vacancies.salary_currency = 'USD'
+
+	Question: 'Какие названия вакансий есть у работодателя с названием 'ООО Ништяк'?'
+		Changes count: 15
+		Keep percent: 28.57
+		Execution check: SUCCESS
+		Gold sql: SELECT DISTINCT v.name FROM vacancies v JOIN companies c ON v.company_id = c.company_id WHERE c.name = 'ООО Ништяк'
+		Pred sql: SELECT vacancies.name  FROM vacancies  JOIN companies ON vacancies.company_id = companies.company_id  WHERE companies.name = 'ООО Ништяк'
+
+	Question: 'Покажите все вакансии, добавленные после 01-01-2022'
+		Changes count: 1
+		Keep percent: 90.0
+		Execution check: SUCCESS
+		Gold sql: SELECT name FROM vacancies WHERE date_added > '2022-01-01'
+		Pred sql: SELECT vacancies.vacancy_id, vacancies.name FROM vacancies WHERE vacancies.date_added > '2022-01-01'
+
+	Question: 'Покажите первые десять вакансий с наиболее высоким уровнем зарплаты.'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT name FROM vacancies ORDER BY salary_to DESC LIMIT 10
+		Pred sql: SELECT name  FROM vacancies  ORDER BY salary_to DESC  LIMIT 10
+
+	Question: 'В каком департаменте открыта вакансия с идентификатором 3'
+		Can't optimize query, using query as is. Error: Column 'department_name' could not be resolved
+		Changes count: 24
+		Keep percent: 7.69
+		Execution check: SUCCESS
+		Gold sql: SELECT department_name FROM vacancies v JOIN departments d ON v.department_id = d.department_id WHERE v.vacancy_id = 3
+		Pred sql: SELECT departments.department_name  FROM vacancies  JOIN departments ON vacancies.department_id = departments.department_id  WHERE vacancies.vacancy_id = 3
+
+	Question: 'Предоставьте список вакансий для 'backend' направления в компании 'Yandex'.'
+		Changes count: 19
+		Keep percent: 26.92
+		Execution check: SUCCESS
+		Gold sql: SELECT v.name FROM vacancies v JOIN companies c ON v.company_id = c.company_id WHERE v.direction = 'backend' AND c.name = 'Yandex'
+		Pred sql: SELECT vacancies.vacancy_id, vacancies.name  FROM vacancies  JOIN companies ON vacancies.company_id = companies.company_id  WHERE vacancies.direction = 'backend' AND companies.name LIKE '%Yandex%'
+
+	Question: 'В каких компаниях из Москвы есть вакансии для 'senior' специалистов?'
+		Changes count: 15
+		Keep percent: 40.0
+		Execution check: SUCCESS
+		Gold sql: SELECT DISTINCT c.name FROM companies c JOIN vacancies v ON c.company_id = v.company_id WHERE v.level = 'senior' AND c.company_city = 'Москва'
+		Pred sql: SELECT DISTINCT companies.name  FROM companies  JOIN vacancies ON companies.company_id = vacancies.company_id  WHERE companies.company_city = 'Москва'  AND vacancies.level = 'senior'
+
+	Question: 'Показать департаменты, которые находятся в компании 'ООО Ништяк'.'
+		Changes count: 18
+		Keep percent: 21.74
+		Execution check: SUCCESS
+		Gold sql: SELECT d.department_name FROM departments d JOIN companies c ON d.company_id = c.company_id WHERE c.name = 'ООО Ништяк'
+		Pred sql: SELECT departments.department_id, departments.department_name, departments.department_code  FROM departments  JOIN companies ON departments.company_id = companies.company_id  WHERE companies.name = 'ООО Ништяк'
+
+	Question: 'Сколько вакансий с удаленной работой есть в компаниях Москвы?'
+		Changes count: 14
+		Keep percent: 44.0
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(*) FROM vacancies v INNER JOIN companies c ON v.company_id = c.company_id WHERE v.schedule_type = 'remote' AND c.company_city = 'Москва';
+		Pred sql: SELECT COUNT(*)  FROM vacancies  JOIN companies ON vacancies.company_id = companies.company_id  WHERE vacancies.schedule_type = 'remote'  AND companies.company_city = 'Москва'
+
+	Question: 'Сколько вакансий предлагает департамент 'finance' компании 'ООО Рога и Копыта'?'
+		Changes count: 24
+		Keep percent: 31.43
+		Execution check: SUCCESS
+		Gold sql: SELECT COUNT(v.vacancy_id) FROM vacancies v JOIN departments d ON v.department_id = d.department_id INNER JOIN companies c ON v.company_id = c.company_id WHERE d.department_name = 'finance' AND c.name = 'ООО Рога и Копыта';
+		Pred sql: SELECT COUNT(*)  FROM vacancies  JOIN departments ON vacancies.department_id = departments.department_id  JOIN companies ON vacancies.company_id = companies.company_id  WHERE departments.department_name = 'finance' AND companies.name = 'ООО Рога и Копыта'
+
+	Question: 'Какое количество вакансий для 'middle' специалистов было добавлено в компаниях 'Санкт-Петербурга' в 2022 году?'
+		Changes count: 32
+		Keep percent: 20.0
+		Execution check: FAILED
+		Mismatched Values:
+			Gold: cols={'count(v.vacancy_id)': '18'} Pred: cols={'count_star()': '17'}
+		Gold sql: SELECT COUNT(v.vacancy_id) FROM vacancies v INNER JOIN companies c ON v.company_id = c.company_id WHERE c.company_city
+		= 'Санкт-Петербург' AND v.level = 'middle' AND v.date_added BETWEEN '2022-01-01' AND '2022-12-31'
+		Pred sql: SELECT COUNT(*)  FROM vacancies  WHERE vacancies.level = 'middle'  AND vacancies.date_added >= '2022-01-01'  AND
+		vacancies.date_added < '2023-01-01'  AND vacancies.work_location = 'Санкт-Петербург'
+
+	Question: 'Какова средняя нижняя граница зарплаты вакансий в компаниях из Екатеринбурга?'
+		Changes count: 0
+		Keep percent: 100.0
+		Execution check: SUCCESS
+		Gold sql: SELECT AVG(v.salary_from) FROM vacancies v JOIN companies c ON v.company_id = c.company_id WHERE c.company_city = 'Екатеринбург'
+		Pred sql: SELECT AVG(v.salary_from)  FROM vacancies v JOIN companies c ON v.company_id = c.company_id WHERE c.company_city = 'Екатеринбург'
+
+	Question: 'Сколько вакансий предложено в компаниях, которые расположены на улице Ленина?'
+		Changes count: 14
+		Keep percent: 33.33
+		Execution check: FAILED
+		Mismatched Values:
+			Gold: cols={'count_star()': '16'} Pred: cols={'count_star()': '43'}
+		Gold sql: SELECT COUNT(*) FROM vacancies v JOIN companies c ON v.company_id = c.company_id WHERE c.company_street LIKE 'ул. Ленина%'
+		Pred sql: SELECT COUNT(*)  FROM vacancies  JOIN companies ON vacancies.company_id = companies.company_id  WHERE companies.company_street LIKE '%Ленина%'
+
+	Question: 'Какие вакансии предлагаются в компаниях из Санкт-Петербурга, в направлении 'bigdata'?'
+		Changes count: 16
+		Keep percent: 36.0
+		Execution check: SUCCESS
+		Gold sql: SELECT DISTINCT v.name FROM vacancies v JOIN companies c ON v.company_id = c.company_id WHERE c.company_city = 'Санкт-Петербург' AND v.direction = 'bigdata'
+		Pred sql: SELECT vacancies.name  FROM vacancies  JOIN companies ON vacancies.company_id = companies.company_id  WHERE companies.company_city = 'Санкт-Петербург'  AND vacancies.direction = 'bigdata'
+
+Summary:
+	not parsed: 1
+	0%: 0, exec success: 0 {'easy': 0, 'medium': 0, 'hard': 0} {'easy': '0.0%', 'medium': '0.0%', 'hard': '0.0%'}
+	(0-25%]: 8, exec success: 7 {'easy': 0, 'medium': 7, 'hard': 0} {'easy': '0.0%', 'medium': '17.1%', 'hard': '0.0%'}
+	(25-50%]: 12, exec success: 10 {'easy': 1, 'medium': 7, 'hard': 2} {'easy': '7.1%', 'medium': '17.1%', 'hard': '40.0%'}
+	(50-75%]: 5, exec success: 5 {'easy': 2, 'medium': 2, 'hard': 1} {'easy': '14.3%', 'medium': '4.9%', 'hard': '20.0%'}
+	(75-100%]: 34, exec success: 33 {'easy': 10, 'medium': 21, 'hard': 2} {'easy': '71.4%', 'medium': '51.2%', 'hard': '40.0%'}
+
+	not select: 0
+	parse errors: 1
+	exec errors: 0
+	unknown errors: 0
+	critical errors: 7
+
+	Total percent of successfully executed sql by complexity:
+	Easy: 92.9%
+	Medium: 90.2%
+	Hard: 100.0%
+
+	Metric(Easy+Medium): 90.9% (50/55)
+
+	Total percent of successfully executed sql 91.7% (55/60)
