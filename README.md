@@ -64,5 +64,8 @@ Each idea directory includes all artifacts needed to inspect and reproduce the r
 
 Plotting scripts (`plot.py`) are included per idea to reproduce the charts found in the papers.
 
+---
+## Citation
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16785125.svg)](https://doi.org/10.5281/zenodo.16785125)
 
 
